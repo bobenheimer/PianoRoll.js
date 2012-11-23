@@ -1,0 +1,145 @@
+* {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+html, body  {
+   height: 100%;
+}
+
+body {
+    background: #E5E5E5;
+    font-family: helvetica;
+}
+
+/*------------------------------------------------MENU-----------------------------------------------------*/
+#menu {
+    background-color: #335086;
+}
+
+#options {
+    /* height: 100px; */
+    /*width:100%;*/
+
+    margin-bottom: 5px;
+}
+
+#options>div {
+    margin: 5px;
+    display: inline-block;
+}
+
+#clear {
+    
+}
+
+img {
+    vertical-align: middle;
+}
+
+#about {
+    background: #FFF;
+
+}
+
+#song-controls {
+    background-color: #FFF;
+}
+
+#tracks-container {
+    color: #E5E5E5;
+}
+
+/*------------------------------------------------PIANO-----------------------------------------------------*/
+
+#piano-container {
+    float: left;/* Make this div as wide as its contents */
+    height: 100%;
+    overflow: hidden;
+
+}
+
+#piano {
+    position: relative;
+    width: 150px;
+    padding-bottom: 50px;
+}
+
+#white-keys {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+    
+}
+
+#black-keys {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+
+
+/*------------------------------------------------GRID-----------------------------------------------------*/
+
+#beat {
+    height: 20px;
+    width: 150px;
+    float: left;
+
+}
+#measure-counter-container {
+   overflow: hidden;
+
+}
+
+
+#measure-counter {
+    position: relative;
+    width: 3200px;
+    height: 20px;   
+    padding-right:90px;
+}
+
+#measure-counter-canvas {
+
+}
+
+
+#note-lengths div {
+    display: inline-block;
+    height: 45px;
+    width: 40px;
+    background: #FFF;
+    border: outset;
+}
+
+#grid-container {
+    overflow: scroll;
+    height: 100%;
+}
+
+#grid {
+    position: relative;
+    height: 1780px;
+    width: 3000px;
+}
+
+#canvas-notes {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+#canvas-grid {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+
+
