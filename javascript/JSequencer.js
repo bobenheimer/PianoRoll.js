@@ -6,7 +6,7 @@ var Track = function(audiolet, instrument) {
     this.audiolet = audiolet;
     this.notes = [];
     this.instrument = instrument;
-}
+};
 
 /**
  * Add a single note to the track
@@ -22,7 +22,7 @@ Track.prototype.addNote = function(note) {
     }
     this.notes[this.notes.length] = note;
     return note;
-}
+};
 
 /**
  * Remove the given note
@@ -39,11 +39,11 @@ Track.prototype.removeNote = function(frequency, beat, duration, volume) {
             return;
         }
     }
-}
+};
 
 Track.prototype.removeAll = function() {
     this.notes = [];
-}
+};
 
 /**
  * Play the song
@@ -67,7 +67,7 @@ Track.prototype.play = function(beat) {
     for (var i = startNote; i < this.notes.length; i++) {
         this.audiolet.scheduler.addRelative(this.notes[i].beat - beat, this.playNote.bind(this, this.notes[i].frequency, this.notes[i].beat, this.notes[i].duration, this.notes[i].volume));
     }    
-}
+};
 
 /**
  * Play a note
@@ -80,7 +80,7 @@ Track.prototype.playNote = function(frequency, beat, duration, volume) {
     var note = new Note(frequency, beat, duration, volume);
     var noteToPlay = new this.instrument(this.audiolet, note.frequency, note.duration, note.volume, this.audiolet.scheduler.bpm);
     noteToPlay.connect(this.audiolet.output);
-}
+};
 
 /**
  * Get the index where the Beat should be
@@ -94,7 +94,7 @@ Track.prototype.findBeatIndex = function(beat) {
 		}
 	}
 	return i;
-}
+};
 
 /**
  * A note consists of a frequency, a beat, and a duration
@@ -107,11 +107,11 @@ var Note = function(frequency, beat, duration, volume) {
     this.beat = beat;
     this.duration = duration; 
     this.volume = volume;
-}
+};
 
 Note.prototype.toString = function() {
     return "frequency:" + this.frequency + " beat: " + this.beat + " duration: " + this.duration; 
-}
+};
 
 /**
  * A Song contains 0 or more tracks, a tempo
@@ -120,7 +120,7 @@ var Song = function() {
     this.audiolet = new Audiolet();
 	this.tempo = 100;
 	this.tracks = [];
-}
+};
 
 /**
  * Create a new track for the song
@@ -129,7 +129,7 @@ var Song = function() {
 Song.prototype.createTrack = function(instrument) {
     this.tracks[this.tracks.length] = new Track(this.audiolet, instrument);
     return this.tracks[this.tracks.length - 1];
-}
+};
 
 /**
  * Change the tempo of the track
@@ -138,7 +138,7 @@ Song.prototype.createTrack = function(instrument) {
 Song.prototype.changeTempo  = function(newTempo) {
     this.tempo = newTempo;
     this.audiolet.scheduler.setTempo(newTempo);
-}
+};
 
 /**
  * Play the song at the specified beat
@@ -148,7 +148,7 @@ Song.prototype.play = function(beat) {
 	for (var i = 0; i < this.tracks.length; i++) {
 		this.tracks[i].play(beat);
 	}
-}
+};
 
 Song.prototype.getAllNotes = function() {
     var allNotes = [];
@@ -156,4 +156,4 @@ Song.prototype.getAllNotes = function() {
         allNotes[i] = this.tracks[i].notes;
     }
     return allNotes;
-}
+};

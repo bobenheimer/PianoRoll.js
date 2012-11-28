@@ -25,9 +25,7 @@ var instrumentList = {
                 this.envMulAdd.connect(this.gain, 0, 1);
             }
         },
-            
-            
-        
+                   
         RockOrgan: {
             playFunction: function(audiolet, frequency, duration, volume, bpm) {
                 AudioletGroup.apply(this, [audiolet, 0, 1]);
@@ -39,19 +37,8 @@ var instrumentList = {
                 this.gain1 = new Gain(audiolet, 0.9);
                 this.gain2 = new Gain(audiolet, 0.2);
                 this.gain3 = new Gain(audiolet, 0.5);
-
-                //this.modulator = new Sine(this.audiolet, frequency);
-                console.log(frequency);
-                this.modulatorMulAdd = new Tanh(this.audiolet);
-                
+                this.modulatorMulAdd = new Tanh(this.audiolet);               
                 this.finalGain = new Gain(audiolet, 0.1);
-                /*this.envelope = new Envelope(audiolet, 1, [1, 2, 4, 8], [0.2 * fullDuration, 0.6 * fullDuration, 0.2 * fullDuration], 0.1,
-                    function() {
-                    console.log("test");
-                        audiolet.scheduler.addRelative(0, this.remove.bind(this));
-
-                    }.bind(this)
-                ); */
                 this.envelope = new PercussiveEnvelope(audiolet, 1, fullDuration * 0.1, fullDuration * 0.9,
                     function() {
                         audiolet.scheduler.addRelative(0, this.remove.bind(this));
@@ -59,19 +46,11 @@ var instrumentList = {
                 );
                 
                 this.filter = new LowPassFilter(this.audiolet, 3000);
-                //this.modulator = new Sine(this.audiolet, 1);
-                //this.modulator.connect(this.modulatorMulAdd);
-                //this.modulator.connect(this.modulatorMulAdd);
-                //this.modulatorMulAdd.connect(this.triangle1);
-                //this.triangle1.connect(this.modulatorMulAdd);  
                 this.triangle1.connect(this.gain1);  
                 this.triangle2.connect(this.gain2);
                 this.triangle3.connect(this.gain3); 
                 
                 this.envelope.connect(this.finalGain);
-
-               // console.log(this.gain1);
-                //this.envelope.connect(this.gain3);
                 this.gain1.connect(this.finalGain);
                 this.gain2.connect(this.finalGain);
                 this.gain3.connect(this.finalGain);
@@ -88,9 +67,7 @@ var instrumentList = {
                 // Basic wave
                 this.sine = new Saw(audiolet, frequency);
                 
-                this.filter = new DampedCombFilter(audiolet, 0.06, 0.02, 0.04, 0.2);
-                
-                //this.filter = new Reverb(audiolet, 1.5, 0.5, 0.8);
+                this.filter = new DampedCombFilter(audiolet, 0.06, 0.02, 0.04, 0.2);              
                 
                 // Gain envelope
                 this.gain = new Gain(audiolet, 0.07);
@@ -149,8 +126,6 @@ var instrumentList = {
                 this.gain.connect(this.outputs[0]);
             }            
         },
-
-
 };
 
 for (var key in instrumentList) {
